@@ -27,6 +27,25 @@ class ContentBuilder extends Field
     
     
      
+         $('#$area_id').attr('contenteditable',true);
+        
+         var cb_nd_config={h1:{class:'heading heading--1',selector:'.heading.heading--1'},
+                h2:{class:'heading heading--2',selector:'.heading.heading--2'},
+                h3:{class:'heading heading--3',selector:'.heading.heading--3'},
+                ul:{class:'list',selector:'.list'},
+                li:{class:'list__item',selector:'.list__item'},
+                a:{class:'link',selector:'.link'}
+            };
+         $('#$area_id').on('input focus paste copy cut delete blur keyup',function(){
+                for(element in cb_nd_config){
+                    var i=0;
+                    $(this).find(element).not('.visually-hidden ,'+cb_nd_config[element].selector).each(function(e,b){
+                        $(this).addClass(cb_nd_config[element].class);
+                        i++
+                    });
+                }
+            })
+     
         $('#$area_id').contentbuilder({
              zoom: 1,
              fileselect: '/manage/files/export',
